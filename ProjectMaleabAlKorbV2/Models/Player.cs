@@ -11,7 +11,8 @@ namespace ProjectMaleabAlKorbV2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Player
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +21,13 @@ namespace ProjectMaleabAlKorbV2.Models
             this.Reservations = new HashSet<Reservation>();
         }
     
+        
         public int playerNo { get; set; }
+        [Required]
         public string names { get; set; }
+        [Required] [EmailAddress(ErrorMessage ="Must be like this : example@example.com")]
         public string emails { get; set; }
+
         public string passwords { get; set; }
         public string phone { get; set; }
         public Nullable<System.DateTime> dateCreated { get; set; }

@@ -34,7 +34,7 @@ namespace ProjectMaleabAlKorbV2.Controllers
             {
                 if (model.messageNo > 0)
                 {
-                    Response.Write("<script>console.log('messageNo > 0')</script>");
+                   // Response.Write("<script>console.log('messageNo > 0')</script>");
                     Contact contact = db.Contacts.SingleOrDefault(x => x.messageNo == model.messageNo);
                     contact.name = model.name;
                     contact.emails = model.emails;
@@ -45,7 +45,7 @@ namespace ProjectMaleabAlKorbV2.Controllers
                 }
                 else
                 {
-                    Response.Write("<script>console.log('else')</script>");
+                   // Response.Write("<script>console.log('else')</script>");
                     Contact contact = new Contact();
                     contact.name = model.name;
                     contact.emails = model.emails;
@@ -63,5 +63,25 @@ namespace ProjectMaleabAlKorbV2.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult saveData(Player player)
+        {
+            Player p = new Player();
+            player.phone = "+2126787721";
+            player.dateCreated = DateTime.Now;
+
+            p.names = player.names;
+            p.emails = player.emails;
+            p.passwords = player.passwords;
+
+            db.Players.Add(player);
+            db.SaveChanges();
+
+            
+            //BuildEmailTemplateModel(model.ID);
+            return Json("Registration successfull", JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

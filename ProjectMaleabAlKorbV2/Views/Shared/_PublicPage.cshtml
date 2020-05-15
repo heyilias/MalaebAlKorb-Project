@@ -22,6 +22,21 @@
 
 </head>
 <body>
+    <div id="msgOne" style="text-align:center;">
+        <div class="alert alert-success">
+            <span class="glyphicon glyphicon-ok"></span>
+            <strong>
+                Success Message!
+                Send an email address with confirmation link!
+                please check your inbox
+            </strong>
+        </div>
+    </div>
+    <div id="msgTwo" style="text-align:center;">
+        <div class="alert alert-danger">
+            <span class="glyphicon glyphicon-remove"></span><strong>Error Message! Your registration is not complete</strong>
+        </div>
+    </div>
     <div class="header">
 
         <div class="design_header_right">
@@ -39,7 +54,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#myModal2">
+                    <a href="#" data-toggle="modal" data-target="#myModal2" onclick="singUp()">
                         <i class="fa fa-pencil-square-o"
                            aria-hidden="true"></i> Sign up
                     </a>
@@ -181,6 +196,7 @@
     <script src="~/Scripts/slick.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         $(document).on('ready', function () {
+            
             $(".center").slick({
                 dots: true,
                 infinite: true,
@@ -212,6 +228,7 @@
     <!-- flexisel -->
     <script type="text/javascript">
         $(window).load(function () {
+            
             $("#flexiselDemo1").flexisel({
                 visibleItems: 4,
                 animationSpeed: 1000,
@@ -299,7 +316,7 @@
 
     <script>
         $('#sendMsgs').click(function () {
-            console.log('22');
+            //console.log('22');
             var data = $("#submitForm").serialize();
             $.ajax({
                 type: "Post",

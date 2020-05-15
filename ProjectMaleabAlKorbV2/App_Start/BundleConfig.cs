@@ -26,11 +26,8 @@ namespace ProjectMaleabAlKorbV2
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            #region Template_likage
-
+            #region CSSContent
             
-
-
             bundles.Add(new StyleBundle("~/template/css").Include(
                      "~/Content/bootstrap.css",
                      "~/Content/style.css",
