@@ -66,20 +66,28 @@ namespace ProjectMaleabAlKorbV2.Controllers
 
         public JsonResult saveData(Player player)
         {
-            Player p = new Player();
+           
             player.phone = "+2126787721";
             player.dateCreated = DateTime.Now;
-
-            p.names = player.names;
-            p.emails = player.emails;
-            p.passwords = player.passwords;
-
             db.Players.Add(player);
             db.SaveChanges();
-
             
-            //BuildEmailTemplateModel(model.ID);
             return Json("Registration successfull", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult frmLogin(Player player)
+        {
+            var result = "fail";
+            var DataItem = db.Players.Where(p => p.emails == player.emails && p.passwords == player.passwords).SingleOrDefault();
+            if(DataItem != null)
+            {
+                Session["playerNo"] = DataItem.playerNo.ToString();
+                Session["names"] = DataItem.names.ToString();
+                result = "success";
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
 
 

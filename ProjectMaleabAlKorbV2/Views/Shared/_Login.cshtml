@@ -1,4 +1,4 @@
-﻿<!---------------------------sign up and sign in---------------------------------->
+﻿<!---------------------------sign in---------------------------------->
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -9,11 +9,12 @@
                 <div class="signin-form profile">
                     <h3 class="agileinfo_sign">Login</h3>
                     <div class="login-form">
-                        <form action="#" method="post">
+                        <form action="#" method="post" id="frmLogin">
+                            <div id="msg"><ul style="color:red">Invalid Username or Password</ul></div>
                             <input type="email" name="email" placeholder="E-mail" required="">
                             <input type="password" name="password" placeholder="Password" required="">
                             <div class="tp">
-                                <input type="submit" value="Sign In">
+                                <input type="submit" value="Login" onclick="Login()">
                             </div>
                         </form>
                     </div>
@@ -31,3 +32,27 @@
     </div>
 </div>
 <!-- //Modal1 -->
+
+<script>
+    //Login System
+    $('#msg').hide();
+    var Login = functn () {
+        var data = $('#frmLogin').serialize();
+        $.ajax({
+            type: "post",
+            url: "/Home/CheckValidUser",
+            data: data,
+            success: function (result) {
+                if (result == "fail") {
+                    $('#frmLogin')[0].reset();
+                    $('#msg').show();
+                }
+                else {
+                    alert('testdd');
+                    //window.location.href = "home/index";
+                    $('#msg').hide();
+                }
+            }
+        })
+    }
+</script>
