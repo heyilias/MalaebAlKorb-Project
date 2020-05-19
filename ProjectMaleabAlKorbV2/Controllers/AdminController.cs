@@ -10,12 +10,13 @@ namespace ProjectMaleabAlKorbV2.Controllers
     public class AdminController : Controller
     {
         MalaebAlKorbEntities db = new MalaebAlKorbEntities();
+
         // GET: Admin
         public ActionResult Index()
         {
             return View();
         }
-
+         //Test Commit 
         public ActionResult Registers()
         {
             return View();
