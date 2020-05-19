@@ -50,6 +50,20 @@ namespace ProjectMaleabAlKorbV2.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        //Delete Player
+        public JsonResult DeletePlayer(int playerNo)
+        {
+            bool result = false;
+            Player player = db.Players.SingleOrDefault(p => p.playerNo == playerNo );
+            if (player != null)
+            {
+                db.SaveChanges();
+                result = true;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Reservations()
         {
             return View();
@@ -59,5 +73,34 @@ namespace ProjectMaleabAlKorbV2.Controllers
         {
             return View();
         }
+        
+        public JsonResult GetContactList()
+        {
+            List<Contact> ContactList = db.Contacts.ToList<Contact>();
+
+            return Json(ContactList, JsonRequestBehavior.AllowGet);
+        }
+
+        //ADD PLAYERS
+        public JsonResult SaveDataInDatabaseContact(Contact model)
+        {
+            var result = false;
+            if (ModelState.IsValid)
+                try
+                {
+                    model.dateMessage = DateTime.Now;
+                    db.Contacts.Add(model);
+                    db.SaveChanges();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

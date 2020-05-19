@@ -4,10 +4,9 @@
     Layout = "~/Views/Shared/_AdminPage.cshtml";
 }
 
-<!--Contenu De la pge-->
+<!--Contenu De la page-->
 <div class="row-one widgettable">
     <div class="col-md-12 content-top-2 card">
-
 
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -75,7 +74,26 @@
         </div>
     </div>
 
-    
+    @*Create A PopUp Modal For DeleteConfirmation*@
+
+    <div class="modal fade" id="DeleteConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h4>Delete Player</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="hs">Are You Sure? You Want To Delete This Player.</h4>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" data-dismiss="modal" id="r">Cancle</a>
+                    <a href="#" class="btn btn-danger" onclick="ConfirmDelete()">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -85,7 +103,7 @@
     function DataBind(playerList) {
         var setData = $('#SetPlayerList');
         for (var i = 0; i < playerList.length; i++) {
-            var Data = '<tr class="row_"' + playerList[i].playerNo + '><td>' +
+            var Data = '<tr class="row_' + playerList[i].playerNo + '"><td>' +
                 playerList[i].playerNo + '</td><td>' +
                 playerList[i].names + '</td><td>' +
                 playerList[i].emails + '</td><td>' +
@@ -124,6 +142,23 @@
     });
 
 
-    
+    //Show The Popup Modal For DeleteComfirmation
+    var DeletePlayerRecord = function (playerNo) {
+        $("#plyID").val(playerNo);
+        $("#DeleteConfirmation").modal("show");
+    }
+    var ConfirmDelete = function () {
+        var plyID = 8;
+        $.ajax({
+            type: "POST",
+            url: "/Admin/DeletePlayer?playerNo=" + plyID,
+            success: function (result) {
+                $(".row_" + plyID).remove();
+                alert("Deleted successfully !!");
+                window.location.href = "/Admin/Registers";
+                $("#DeleteConfirmation").modal("hide");
+            }
+        })
+    }
 
 </script>
