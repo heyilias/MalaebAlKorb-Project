@@ -26,7 +26,7 @@ namespace ProjectMaleabAlKorbV2.Controllers
 
             return View();
         }
-
+        //Contact
         public JsonResult SaveDataInDatabase(Contact model)
         {
             var result = false;
@@ -63,27 +63,26 @@ namespace ProjectMaleabAlKorbV2.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        //Player
         public JsonResult saveData(Player player)
         {
-           
-            player.phone = "+2126787721";
             player.dateCreated = DateTime.Now;
             db.Players.Add(player);
             db.SaveChanges();
             
             return Json("Registration successfull", JsonRequestBehavior.AllowGet);
         }
-
-        public JsonResult frmLogin(Player player)
+        //Login Form
+        public JsonResult Login_Verifier(Player player)
         {
-            var result = "fail";
+            var result = "success";
             var DataItem = db.Players.Where(p => p.emails == player.emails && p.passwords == player.passwords).SingleOrDefault();
             if(DataItem != null)
             {
                 Session["playerNo"] = DataItem.playerNo.ToString();
                 Session["names"] = DataItem.names.ToString();
-                result = "success";
+                Session["password"] = DataItem.passwords.ToString();
+               
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

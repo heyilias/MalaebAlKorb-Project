@@ -16,6 +16,14 @@
                             <div class="tp">
                                 <input type="submit" value="Login" onclick="Login()">
                             </div>
+                            <br>
+                            <div class="remember">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox">
+                                    Remember me
+                                </label>
+                                <a href="#" class="pull-right">Forgot Password?</a>
+                            </div>
                         </form>
                     </div>
                     <div class="login-social-grids">
@@ -33,6 +41,19 @@
 </div>
 <!-- //Modal1 -->
 
+<style>
+
+    .custom-checkbox {
+        position: relative;
+        right: 105px;
+    }
+    @@media(max-width: 600px) {
+        .custom-checkbox {
+            position: absolute;
+            right: 0;
+        }       
+}
+</style>
 <script>
     //Login System
     $('#msg').hide();
@@ -40,7 +61,7 @@
         var data = $('#frmLogin').serialize();
         $.ajax({
             type: "post",
-            url: "/Home/CheckValidUser",
+            url: "/Home/Login_Verifier",
             data: data,
             success: function (result) {
                 if (result == "fail") {

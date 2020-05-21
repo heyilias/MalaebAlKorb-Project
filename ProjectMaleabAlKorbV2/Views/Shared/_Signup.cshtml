@@ -1,4 +1,4 @@
-﻿@model ProjectMaleabAlKorbV2.Models.Player
+﻿
 <!-- Modal2 -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
     <div class="modal-dialog">
@@ -7,21 +7,40 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <div class="signin-form profile">
+                    @**0*************************************************************@
+                    <div id="msgOne" style="text-align:center;">
+                        <div class="alert alert-success">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <strong>
+                                Success Message!
+                                Send an email address with confirmation link!
+                                please check your inbox
+                            </strong>
+                        </div>
+                    </div>
+                    <div id="msgTwo" style="text-align:center;">
+                        <div class="alert alert-danger">
+                            <span class="glyphicon glyphicon-remove"></span><strong>Error Message! Your registration is not complete</strong>
+                        </div>
+                    </div>
+                    @***************************************************************@
                     <h3 class="agileinfo_sign">Sing Up</h3>
-                    
+
                     <div class="login-form">
-                        <form action="#" method="post" id="registerForm">
-                            @Html.TextBoxFor(p => p.names, new { @id = "regUsername", @placeholder = "Username", @name = "name", @type = "text", @required = "" })
+                        <form id="registerForm">
+                            @*@Html.TextBoxFor(p => p.names, new { @id = "regUsername", @placeholder = "Username", @name = "name", @type = "text", @required = "" })
                             @Html.TextBoxFor(p => p.emails, new { @id = "regEmail", @placeholder = "Email", @name = "email", @type = "email", @required = "" })
-                            @Html.TextBoxFor(p => p.passwords, new { @id = "regPassword", @placeholder = "Password", @name = "password", @type = "password", @required = "" })
-                            @*Html.TextBoxFor(p => p.names, new { @id = "regUsername", @placeholder = "Username", @name = "name", @type = "text", @required = "" })
+                            @Html.TextBoxFor(p => p.passwords, new { @id = "regPassword", @placeholder = "Password", @name = "password", @type = "password", @required = "" })*@
+                                        @*Html.TextBoxFor(p => p.names, new { @id = "regUsername", @placeholder = "Username", @name = "name", @type = "text", @required = "" })
                             @Html.s(p => p.names, new { @id = "regUsername", @placeholder = "Username", @name = "name", @type = "text", @required = "" })*@
 
-                            <!--input type="text" name="name" placeholder="" id="" required>
-                            <input type="" name="" placeholder="" id="" required>
-                            <input type="" name="" placeholder="" id="" required-->
-                            <input type="password" name="password" placeholder="Confirm Password" id="regPasswordConfirm" required>
-                            <input type="submit" value="Sign Up" onclick="saveForm()">
+                            <input type="text" name="names" placeholder="Username" id="username">
+                            <input type="email" name="emails" placeholder="Email" id="email" >
+                            <input type="password" name="passwords" placeholder="Password" id="password">
+                            <input type="text" name="phone" placeholder="Phone" id="phone">
+                            <br />
+                            <button class="btn btn-info form-control" type="button" onclick="saveForm()">Sign Up</button>
+                            @*<input type="submit" value="Sign Up" onclick="saveForm()">*@
                         </form>
                     </div>
                     <p><a href="#"> By clicking register, I agree to your terms</a></p>
@@ -38,23 +57,22 @@
 
     function saveForm() {
 
-        var user = $('#regUsername').val();
-        var email = $('#regEmail').val();
-        var pass = $('#regPassword').val();
-        var pass = $('#regPasswordConfirm').val();
+        var user = $('#username').val();
+        var email = $('#email').val();
+        var pass = $('#password').val();
+        var phone = $('#phone').val();
 
         var data = $('#registerForm').serialize();
-        if (user == '' || email == '' || pass == '') {
+        if (user == "" || email == "" || pass == "" || phone == "") {
             $('#msgOne').hide();
             $('#msgTwo').show();
-            return false;
         }
+        
         $.ajax({
             type: "POST",
             data: data,
             url: "/Home/saveData",
-            success: function (result) {
-                //alert(result);
+            success: function (result) { 
                 $('#msgOne').show();
                 $('#msgTwo').hide();
                 $('#registerForm')[0].reset();
