@@ -27,7 +27,7 @@
                             <th>Action(Delete)</th>
                         </tr>
                     </thead>
-                    <tbody id="SetPlayerList">
+                    <tbody id="SetContactList">
                         <tr id="LoadingStatus" style="color:red"></tr>
                     </tbody>
                 </table>
@@ -47,18 +47,18 @@
                 <div class="modal-body">
                     <form id="form">
                         <fieldset id="submitForm">
-                            @Html.HiddenFor(c => c.messageNo, new { @id = "plyID" })
+                            @Html.HiddenFor(c => c.messageNo, new { @id = "ctnID" })
                             <div class="form-group">
-                                @Html.TextBoxFor(c => c.name , new { @id = "plyName", @class = "form-control", @placeholder = "Name" })
+                                @Html.TextBoxFor(c => c.name , new { @id = "cntName", @class = "form-control", @placeholder = "Name" })
                             </div>
                             <div class="form-group">
                                 @Html.TextBoxFor(c => c.emails, new { @id = "email", @class = "form-control", @placeholder = "Email" })
                             </div>
                             <div class="form-group">
-                                @Html.TextAreaFor(c => c.allMessage, new { @id = "password", @class = "form-control", @placeholder = "Message" })
+                                @Html.TextAreaFor(c => c.allMessage, new { @id = "allMsg", @class = "form-control", @placeholder = "Message" })
                             </div>
                             <div class="form-group">
-                                <a class="btn btn-block btn-danger" id="savePlayer">Save</a>
+                                <a class="btn btn-block btn-danger" id="saveContact">Save</a>
                             </div>
                         </fieldset>
                     </form>
@@ -95,17 +95,17 @@
     $('LoadingStatus').html('Loading....');
     $.get('/Admin/GetContactList', null, DataBind);
 
-    function DataBind(playerList) {
-        var setData = $('#SetPlayerList');
-        for (var i = 0; i < playerList.length; i++) {
-            var Data = '<tr class="row_' + playerList[i].messageNo + '"><td>' +
-                playerList[i].messageNo + '</td><td>' +
-                playerList[i].name + '</td><td>' +
-                playerList[i].emails + '</td><td>' +
-                playerList[i].allMessage + '</td><td>' +
-                playerList[i].dateMessage + '</td>' +
-                '<td><a href="#" class="btn btn-warning" style="text-align:center;" onclick="EditPlayerRecord(' + playerList[i].messageNo + ')"><span class="glyphicon glyphicon-edit"></span></a></td>' +
-                '<td><a href="#" class="btn btn-danger" onclick="DeletePlayerRecord(' + playerList[i].messageNo + ')"><span class="glyphicon glyphicon-trash"></span></a></td>' +
+    function DataBind(ContactList) {
+        var setData = $('#SetContactList');
+        for (var i = 0; i < ContactList.length; i++) {
+            var Data = '<tr class="row_' + ContactList[i].messageNo + '"><td>' +
+                ContactList[i].messageNo + '</td><td>' +
+                ContactList[i].name + '</td><td>' +
+                ContactList[i].emails + '</td><td>' +
+                ContactList[i].allMessage + '</td><td>' +
+                ContactList[i].dateMessage + '</td>' +
+                '<td><a href="#" class="btn btn-warning" style="text-align:center;" onclick="EditContact(' + ContactList[i].messageNo + ')"><span class="glyphicon glyphicon-edit"></span></a></td>' +
+                '<td><a href="#" class="btn btn-danger" onclick="DeleteContact(' + ContactList[i].messageNo + ')"><span class="glyphicon glyphicon-trash"></span></a></td>' +
                 '</tr>';
             setData.append(Data);
             $('LoadingStatus').html('Loading....');
@@ -113,14 +113,14 @@
     }
 
     //show the Popup for add new Player
-    function AddNewRegisters(playerNo) {
+    function AddNewRegisters(messageNo) {
         $('#form')[0].reset();
-        $('#plyID').val(0);
+        $('#ctnID').val(0);
         $('#ModalTitle').html("Add New Contact");
         $('#myModalpop').modal();
     }
 
-    $('#savePlayer').click(function () {
+    $('#saveContact').click(function () {
         var data = $("#submitForm").serialize();
         $.ajax({
             type: "Post",
@@ -136,23 +136,44 @@
     });
 
 
+    //show the Popup for Edit student
+    function EditContact(messageNo) {
+        var url = "/Admin/GetContactById?messageNo=" + messageNo;
+        $('#ModalTitle').html("Update Contact");
+        $('#myModalpop').modal();
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $('#ctnID').val(obj.messageNo);
+                $('#ctnName').val(obj.name);
+                $('#email').val(obj.emails);
+                $('#allMsg').val(obj.allMessage);
+                
+            }
+        })
+    }
+
     //Show The Popup Modal For DeleteComfirmation
-    var DeletePlayerRecord = function (playerNo) {
-        $("#plyID").val(playerNo);
+    var DeleteContact = function (playerNo) {
+        $("#ctnID").val(playerNo);
         $("#DeleteConfirmation").modal("show");
     }
     var ConfirmDelete = function () {
-        var plyID = 8;
+        var cntID = $("#ctnID").val();
         $.ajax({
             type: "POST",
-            url: "/Admin/DeletePlayer?playerNo=" + plyID,
+            url: "/Admin/DeleteContact?messageNo=" + cntID,
             success: function (result) {
-                $(".row_" + plyID).remove();
+                $(".row_" + cntID).remove();
                 alert("Deleted successfully !!");
-                window.location.href = "/Admin/Registers";
+                window.location.href = "/Admin/Contact";
                 $("#DeleteConfirmation").modal("hide");
             }
         })
     }
+
+
 
 </script>

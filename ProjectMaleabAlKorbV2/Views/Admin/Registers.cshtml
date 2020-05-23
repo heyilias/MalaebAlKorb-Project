@@ -141,6 +141,25 @@
         })
     });
 
+    //show the Popup for Edit student
+    function EditPlayerRecord(playerNo) {
+        var url = "/Admin/GetPlayerById?playerNo=" + playerNo ;
+        $('#ModalTitle').html("Update Player Record");
+        $('#myModalpop').modal();
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $('#plyID').val(obj.playerNo);
+                $('#plyName').val(obj.names);
+                $('#email').val(obj.emails);
+                $('#password').val(obj.passwords);
+                $('#phone').val(obj.phone);
+                
+            }
+        })
+    }
 
     //Show The Popup Modal For DeleteComfirmation
     var DeletePlayerRecord = function (playerNo) {
@@ -148,7 +167,7 @@
         $("#DeleteConfirmation").modal("show");
     }
     var ConfirmDelete = function () {
-        var plyID = 8;
+        var plyID = $("#plyID").val();
         $.ajax({
             type: "POST",
             url: "/Admin/DeletePlayer?playerNo=" + plyID,
@@ -160,5 +179,6 @@
             }
         })
     }
+
 
 </script>
