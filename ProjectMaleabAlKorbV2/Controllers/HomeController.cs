@@ -75,14 +75,14 @@ namespace ProjectMaleabAlKorbV2.Controllers
         //Login Form
         public JsonResult Login_Verifier(Player player)
         {
-            var result = "success";
-            var DataItem = db.Players.Where(p => p.emails == player.emails && p.passwords == player.passwords).SingleOrDefault();
+            var result = "fail";
+            var DataItem = db.Players.Where(p => p.emails == player.emails && p.passwords == player.passwords).FirstOrDefault();
             if(DataItem != null)
             {
                 Session["playerNo"] = DataItem.playerNo.ToString();
                 Session["names"] = DataItem.names.ToString();
                 Session["password"] = DataItem.passwords.ToString();
-               
+                result = "success";
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
