@@ -99,7 +99,7 @@ namespace ProjectMaleabAlKorbV2.Controllers
         {
             return View();
         }
-
+        /***********************Contact**********************************/
         public ActionResult Contact()
         {
             return View();
@@ -159,10 +159,10 @@ namespace ProjectMaleabAlKorbV2.Controllers
         }
 
         // Delete contact
-        public JsonResult DeleteContact(int msgNo)
+        public JsonResult DeleteeContact(int msgNo)
         {
             bool result = false;
-            Contact cnt = db.Contacts.Where(p => p.messageNo == msgNo).FirstOrDefault();
+            Contact cnt = db.Contacts.Where(c => c.messageNo == msgNo).FirstOrDefault();
             if (cnt != null)
             {
                 
@@ -173,5 +173,81 @@ namespace ProjectMaleabAlKorbV2.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+
+        /***********************Staduim****************************/
+        public ActionResult Stadium()
+        {
+            return View();
+        }
+        //show the list
+        public JsonResult GetStadiumList()
+        {
+            List<Stadium> stadiumList = db.Stadia.ToList<Stadium>();
+
+            return Json(stadiumList, JsonRequestBehavior.AllowGet);
+        }
+
+        //ADD Contact
+        public JsonResult SaveDataInStadiumTable(Stadium model)
+        {
+            var result = false;
+            if (ModelState.IsValid)
+                try
+                {
+                    if (model.stadiumNo > 0)
+                    {
+                        Stadium stadium = db.Stadia.Where(s => s.stadiumNo == model.stadiumNo).FirstOrDefault();
+                        stadium.stadiumName = model.stadiumName;
+                        stadium.stadiumCity = model.stadiumCity;
+                        stadium.stadiumCapacity = model.stadiumCapacity;
+                        db.SaveChanges();
+                        result = true;
+                    }
+                    else
+                    {
+                        
+                        db.Stadia.Add(model);
+                        db.SaveChanges();
+                        result = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        // Update Stadium
+        public JsonResult GetStadiumById(int stdID)
+        {
+            Stadium model = db.Stadia.Where(s => s.stadiumNo == stdID).FirstOrDefault();
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
+        }
+
+        //Delete Stadium
+        public JsonResult DeleteStadium(int stadiumNo)
+        {
+            bool result = false;
+            Stadium stadium = db.Stadia.Where(s => s.stadiumNo == stadiumNo).FirstOrDefault();
+            if (stadium != null)
+            {
+                
+                db.Stadia.Remove(stadium);
+                db.SaveChanges();
+                result = true;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

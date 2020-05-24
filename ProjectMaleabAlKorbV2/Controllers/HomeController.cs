@@ -69,6 +69,7 @@ namespace ProjectMaleabAlKorbV2.Controllers
             player.dateCreated = DateTime.Now;
             db.Players.Add(player);
             db.SaveChanges();
+            Session["UserName"] = player.emails;
             
             return Json("Registration successfull", JsonRequestBehavior.AllowGet);
         }
@@ -87,6 +88,12 @@ namespace ProjectMaleabAlKorbV2.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
 
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Contact","Home");
         }
 
 

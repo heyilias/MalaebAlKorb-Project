@@ -33,18 +33,9 @@
         </div>
         <div class="design_header_left">
             <ul>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#myModal3">
-                        <i class="fa fa-user"
-                           aria-hidden="true"></i> Log in
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#myModal2" onclick="singUp()">
-                        <i class="fa fa-pencil-square-o"
-                           aria-hidden="true"></i> Sign up
-                    </a>
-                </li>
+               @{ 
+                   Html.RenderPartial("_loginSingUp");
+               }
             </ul>
 
         </div>

@@ -7,7 +7,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <div class="signin-form profile">
-                    @**0*************************************************************@
+                    @***************************************************************@
                     <div id="msgOne" style="text-align:center;">
                         <div class="alert alert-success">
                             <span class="glyphicon glyphicon-ok"></span>
@@ -54,7 +54,6 @@
 
 <script>
    
-
     function saveForm() {
 
         var user = $('#username').val();
@@ -76,6 +75,7 @@
                 $('#msgOne').show();
                 $('#msgTwo').hide();
                 $('#registerForm')[0].reset();
+                //document.location.href = "/Index";
             }
         })
     }

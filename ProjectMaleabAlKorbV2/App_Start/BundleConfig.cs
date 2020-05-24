@@ -32,7 +32,7 @@ namespace ProjectMaleabAlKorbV2
                      "~/Content/bootstrap.css",
                      "~/Content/style.css",
                      "~/Content/mainStyles.css",
-                     "~/Content/styleFinderPanel.css",
+                     "~/Content/BoxRervation.css",
                      "~/Content/flexslider.css",
                      "~/Content/lsb.css",
                      "~/Content/font-awesome.css"
