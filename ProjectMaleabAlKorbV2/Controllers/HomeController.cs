@@ -90,12 +90,11 @@ namespace ProjectMaleabAlKorbV2.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
-
-        
+       
         public ActionResult LogOut()
         {
             Session.Abandon();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
 
