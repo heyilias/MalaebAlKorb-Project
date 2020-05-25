@@ -17,12 +17,12 @@ namespace ProjectMaleabAlKorbV2.Controllers
 
         public ActionResult About()
         {
-            
+
             return View();
         }
 
         public ActionResult Contact()
-        {  
+        {
 
             return View();
         }
@@ -34,7 +34,7 @@ namespace ProjectMaleabAlKorbV2.Controllers
             {
                 if (model.messageNo > 0)
                 {
-                   // Response.Write("<script>console.log('messageNo > 0')</script>");
+                    // Response.Write("<script>console.log('messageNo > 0')</script>");
                     Contact contact = db.Contacts.SingleOrDefault(x => x.messageNo == model.messageNo);
                     contact.name = model.name;
                     contact.emails = model.emails;
@@ -45,7 +45,7 @@ namespace ProjectMaleabAlKorbV2.Controllers
                 }
                 else
                 {
-                   // Response.Write("<script>console.log('else')</script>");
+                    // Response.Write("<script>console.log('else')</script>");
                     Contact contact = new Contact();
                     contact.name = model.name;
                     contact.emails = model.emails;
@@ -69,31 +69,33 @@ namespace ProjectMaleabAlKorbV2.Controllers
             player.dateCreated = DateTime.Now;
             db.Players.Add(player);
             db.SaveChanges();
-            Session["UserName"] = player.emails;
-            
+            Session["emails"] = player.emails;
+
             return Json("Registration successfull", JsonRequestBehavior.AllowGet);
         }
         //Login Form
         public JsonResult Login_Verifier(Player player)
         {
             var result = "fail";
-            var DataItem = db.Players.Where(p => p.emails == player.emails && p.passwords == player.passwords).FirstOrDefault();
-            if(DataItem != null)
+            var ply = db.Players.Where(p => p.emails == player.emails && p.passwords == player.passwords).FirstOrDefault();
+            if (ply != null)
             {
-                Session["playerNo"] = DataItem.playerNo.ToString();
-                Session["names"] = DataItem.names.ToString();
-                Session["password"] = DataItem.passwords.ToString();
                 result = "success";
+                Session["emails"] = ply.emails;
+                Session["names"] = ply.names;
+                Session["password"] = ply.passwords;
+
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
 
+        
         public ActionResult LogOut()
         {
             Session.Abandon();
-            return RedirectToAction("Contact","Home");
+            return RedirectToAction("Index", "Home");
         }
 
 

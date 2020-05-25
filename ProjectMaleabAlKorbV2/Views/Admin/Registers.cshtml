@@ -24,7 +24,6 @@
                                 <th>Email</th>
                                 <th>Passwords</th>
                                 <th>Phone</th>
-                                <th>Date Created</th>
                                 <th>Action(Edit)</th>
                                 <th>Action(Delete)</th>
                             </tr>
@@ -108,8 +107,7 @@
                 playerList[i].names + '</td><td>' +
                 playerList[i].emails + '</td><td>' +
                 playerList[i].passwords + '</td><td>' +
-                playerList[i].phone + '</td><td>' +
-                playerList[i].dateCreated + '</td>' +
+                playerList[i].phone + '</td>' +
                 '<td><a href="#" class="btn btn-warning" style="text-align:center;" onclick="EditPlayerRecord(' + playerList[i].playerNo + ')"><span class="glyphicon glyphicon-edit"></span></a></td>' +
                 '<td><a href="#" class="btn btn-danger" onclick="DeletePlayerRecord(' + playerList[i].playerNo + ')"><span class="glyphicon glyphicon-trash"></span></a></td>' +
                 '</tr>';

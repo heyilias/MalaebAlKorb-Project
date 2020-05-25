@@ -1,5 +1,5 @@
 ﻿
-@if (Session["UserName"] == null)
+@if (Session["emails"] == null)
 {
     <li>
         <a href="#" data-toggle="modal" data-target="#myModal3">
@@ -18,9 +18,9 @@
 else
 {
     <li>
-        <a href="#" data-toggle="modal" data-target="#myModal2" onclick="singUp()">
+        <a href="#" data-toggle="modal" data-target="#myModal2">
             <i class="fa fa-pencil-square-o"
-               aria-hidden="true"></i> Welcom @Session["UserName"] 
+               aria-hidden="true"></i> Welcome @Session["emails"] 
         </a>
     </li>
     <li>
@@ -30,6 +30,7 @@ else
         </a>
     </li>
 }
+
 
 
 

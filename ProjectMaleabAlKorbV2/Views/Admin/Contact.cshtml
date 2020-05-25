@@ -22,7 +22,6 @@
                             <th>Names</th>
                             <th>Email</th>
                             <th>Messages</th>
-                            <th>Date</th>
                             <th>Action(Edit)</th>
                             <th>Action(Delete)</th>
                         </tr>
@@ -102,8 +101,7 @@
                 ContactList[i].messageNo + '</td><td>' +
                 ContactList[i].name + '</td><td>' +
                 ContactList[i].emails + '</td><td>' +
-                ContactList[i].allMessage + '</td><td>' +
-                ContactList[i].dateMessage + '</td>' +
+                ContactList[i].allMessage + '</td>' +
                 '<td><a href="#" class="btn btn-warning" style="text-align:center;" onclick="EditContact(' + ContactList[i].messageNo + ')"><span class="glyphicon glyphicon-edit"></span></a></td>' +
                 '<td><a href="#" class="btn btn-danger" onclick="DeleteContact(' + ContactList[i].messageNo + ')"><span class="glyphicon glyphicon-trash"></span></a></td>' +
                 '</tr>';
