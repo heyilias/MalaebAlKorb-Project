@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjectMaleabAlKorbV2.Models.Contact
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminPage.cshtml";
@@ -10,7 +10,7 @@
             <div class="r3_counter_box">
                 <i class="pull-left fa fa-laptop user2 icon-rounded"></i>
                 <div class="stats">
-                    <h5><strong>100</strong></h5>
+                    <h5><strong>1</strong></h5>
                     <span>Active User</span>
                 </div>
             </div>
@@ -19,27 +19,27 @@
         <div class="col-md-3 widget widget1">
             <div class="r3_counter_box">
                 <i class="pull-left fa fa-money user2 icon-rounded"></i>
-                <div class="stats">
-                    <h5><strong>12</strong></h5>
-                    <span>Recent Reservation</span>
+                <div class="stats" id="cntPlayer">
+                    
+                    <span>Number of Player</span>
                 </div>
             </div>
         </div>
         <div class="col-md-3 widget widget1">
             <div class="r3_counter_box">
                 <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
-                <div class="stats">
-                    <h5><strong>450</strong></h5>
-                    <span>Reservation Cancel</span>
+                <div class="stats" id="cntContact">
+                    
+                    <span>Number of Contact</span>
                 </div>
             </div>
         </div>
         <div class="col-md-3 widget">
             <div class="r3_counter_box">
                 <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
-                <div class="stats">
-                    <h5><strong>1450</strong></h5>
-                    <span>Total Users</span>
+                <div class="stats" id="cntStadium">
+                    
+                    <span>Number of Stadium</span>
                 </div>
             </div>
         </div>
@@ -59,42 +59,14 @@
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Full Name</th>
-                                    <th>Login</th>
-                                    <th>Message</th>
-                                    <th>Date</th>
+                                    <th>Player ID</th>
+                                    <th>Names</th>
+                                    <th>Email</th>
+                                    <th>Passwords</th>
+                                    <th>Phone</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
-                                <tr>
-                                    <td>item 1</td>
-                                    <td>item 2</td>
-                                    <td>item 3</td>
-                                    <td>item 4</td>
-                                </tr>
-                                <tr>
-                                    <td>item 1</td>
-                                    <td>item 2</td>
-                                    <td>item 3</td>
-                                    <td>item 4</td>
-                                </tr>
-                                <tr>
-                                    <td>item 1</td>
-                                    <td>item 2</td>
-                                    <td>item 3</td>
-                                    <td>item 4</td>
-                                </tr>
-                                <tr>
-                                    <td>item 1</td>
-                                    <td>item 2</td>
-                                    <td>item 3</td>
-                                    <td>item 4</td>
-                                </tr>
-
-
-
-                            </tbody>
+                            <tbody id="SetPlayerList"></tbody>
                         </table>
                         <div class="text-right">
                             <a href="@Url.Action("Registers","Admin")">More Tasks <i class="fa fa-arrow-circle-right"></i></a>
@@ -108,7 +80,7 @@
         <div class="col-md-3 stat">
             <div class="content-top-1">
                 <div class="col-md-6 top-content">
-                    <h5>Sales</h5>
+                    <h5>Number Visit</h5>
                     <label>1283+</label>
                 </div>
                 <div class="col-md-6 top-content1">
@@ -211,45 +183,17 @@
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>reservation No</th>
                                     <th>Full Name</th>
-                                    <th>Phone Number</th>
-                                    <th>Date Reservation</th>
-                                    <th>terrain</th>
+                                    <th>Email</th>
+                                    <th>Date to Play</th>
+                                    <th>Time to Play</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
-                                <tr>
-                                    <td>item 1</td>
-                                    <td>item 2</td>
-                                    <td>item 3</td>
-                                    <td>item 4</td>
-                                </tr>
-                                <tr>
-                                    <td>item 1</td>
-                                    <td>item 2</td>
-                                    <td>item 3</td>
-                                    <td>item 4</td>
-                                </tr>
-                                <tr>
-                                    <td>item 1</td>
-                                    <td>item 2</td>
-                                    <td>item 3</td>
-                                    <td>item 4</td>
-                                </tr>
-                                <tr>
-                                    <td>item 1</td>
-                                    <td>item 2</td>
-                                    <td>item 3</td>
-                                    <td>item 4</td>
-                                </tr>
-
-
-
-                            </tbody>
+                            <tbody id="SetResList"></tbody>
                         </table>
                         <div class="text-right">
-                            <a href="#">More Tasks <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="@Url.Action("Reservations","Admin")">More Tasks <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -264,67 +208,7 @@
                     Recent Contact
                 </div>
                 <div class="panel-body">
-                    <div class="list-group">
-
-                        <div class="activity-row">
-                            <div class="col-xs-3 activity-img">
-                                <img src='images/1.jpg'
-                                     class="img-responsive" alt="" />
-                            </div>
-                            <div class="col-xs-7 activity-desc">
-                                <h5><a href="#">Michael Chris</a></h5>
-                                <p>Hey ! There I'm available.</p>
-                            </div>
-                            <div class="col-xs-2 activity-desc1">
-                                <h6>12:05 PM</h6>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="activity-row">
-                            <div class="col-xs-3 activity-img">
-                                <img src='images/4.jpg'
-                                     class="img-responsive" alt="" />
-                            </div>
-                            <div class="col-xs-7 activity-desc">
-                                <h5><a href="#">Alexander</a></h5>
-                                <p>Hey ! There I'm available.</p>
-                            </div>
-                            <div class="col-xs-2 activity-desc1">
-                                <h6>12:06 PM</h6>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="activity-row">
-                            <div class="col-xs-3 activity-img">
-                                <img src='images/3.jpg'
-                                     class="img-responsive" alt="" />
-                            </div>
-                            <div class="col-xs-7 activity-desc">
-                                <h5><a href="#">Daniel Lucas</a></h5>
-                                <p>Hey ! There I'm available.</p>
-                            </div>
-                            <div class="col-xs-2 activity-desc1">
-                                <h6>01:30 PM</h6>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="activity-row">
-                            <div class="col-xs-3 activity-img">
-                                <img src='images/2.jpg'
-                                     class="img-responsive" alt="" />
-                            </div>
-                            <div class="col-xs-7 activity-desc">
-                                <h5><a href="#">Jackson Jacob</a></h5>
-                                <p>Hey ! There I'm available.</p>
-                            </div>
-                            <div class="col-xs-2 activity-desc1">
-                                <h6>01:50 PM</h6>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-
-
-
+                    <div class="list-group" id="AddRecentContact">
 
                     </div>
                     <div class="text-right">
@@ -340,6 +224,101 @@
         <div class="clearfix"> </div>
     </div>
     <!--Contenu De la pge-->
-    <!--Contenu De la pge-->
-    <!--Contenu De la pge-->
+
 </div>
+
+<script>
+    //
+    //
+    //
+    //Count number of player
+    $.get('/Admin/CountPlayer', null, CountPlayers);
+    function CountPlayers(cntPly) {
+        var setData = $('#cntPlayer');
+        var Data = '<h5><strong>' + cntPly + '</strong></h5>'; 
+        setData.append(Data);
+    }
+
+    //
+    //
+    //
+    //Count Number of Contact
+    $.get('/Admin/CountContact', null, CountContact);
+    function CountContact(cntCnt) {
+        var setData = $('#cntContact');
+        var Data = '<h5><strong>' + cntCnt + '</strong></h5>';
+        setData.append(Data);
+    }
+
+    //
+    //
+    //
+    //Count Number of Stadium 
+    $.get('/Admin/CountStadium', null, CountStadium);
+    function CountStadium(cntStd) {
+        var setData = $('#cntStadium');
+        var Data = '<h5><strong>' + cntStd + '</strong></h5>';
+        setData.append(Data);
+    }
+
+    //
+    //
+    //
+    //Recent Players
+    $.get('/Admin/GetPlyarsList', null, DataBind);
+
+    function DataBind(playerList) {
+        var setData = $('#SetPlayerList');
+        for (var i = playerList.length - 1; i > playerList.length - 5; i--) {
+            var Data = '<tr class="row_' + playerList[i].playerNo + '"><td>' +
+                playerList[i].playerNo + '</td><td>' +
+                playerList[i].names + '</td><td>' +
+                playerList[i].emails + '</td><td>' +
+                playerList[i].passwords + '</td><td>' +
+                playerList[i].phone + '</td>' +
+                '</tr>';
+            setData.append(Data);
+        }
+    }
+
+    //
+    //
+    //
+    //Recent Reservation
+    $.get('/Admin/GetReservationList', null, DataBindres);
+
+    function DataBindres(resList) {
+        var setData = $('#SetResList');
+        for (var i = resList.length - 1; i > resList.length - 5; i--) {
+            var Data = '<tr class="row_' + resList[i].reservationNo + '"><td>' +
+                resList[i].reservationNo + '</td><td>' +
+                resList[i].FullName + '</td><td>' +
+                resList[i].Email + '</td><td>' +
+                resList[i].reservationDate + '</td><td>' +
+                resList[i].reservationTime + '</td>' +
+                '</tr>';
+            setData.append(Data);
+        }
+    }
+
+    //
+    //
+    //
+    //List of Recent Contact
+    $.get('/Admin/GetContactList', null, DataBinds);
+    
+    function DataBinds(contactList) {
+        var setData = $('#AddRecentContact');
+        for (var i = contactList.length - 1; i > contactList.length - 5; i--) {
+            var Data = '<div class="activity-row">' +
+                    '<div class="col-xs-7 activity-desc" >' +
+                        '<h5><a href="#">' + contactList[i].name + '</a></h5>' +
+                        ' <p>' + contactList[i].allMessage +'</p>' +
+                    '</div>' +
+                    '<div class="clearfix"> </div>' +
+                '</div>';
+            setData.append(Data);
+        }
+    }
+    
+</script>

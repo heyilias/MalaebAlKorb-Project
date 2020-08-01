@@ -3,7 +3,11 @@
 @{
     ViewBag.Title = "Contact";
 }
+@section Contact{
 
+    <link href="~/Content/styleContact.css" rel="stylesheet" />
+    <link href="~/Content/font-awesomee.css" rel="stylesheet" />
+}
 <!-- /banner -->
 <div class="banner1">
     <div class="wthree_banner1_info">
@@ -11,89 +15,127 @@
     </div>
 </div>
 <!-- //banner -->
-<!-- mail -->
-<div class="team">
-    <div class="container">
-        <h3 class="Mk_header maak_agileits_header">Contact <span>Us</span></h3>
-        <p class="sub_para_agile">Add Some Short Description</p>
-        <div class="agile_team_grids_top">
-            <div class="col-md-6 agileinfo_mail_grid_left">
-                <form action="#" method="post" id="submitForm">
-                    @Html.HiddenFor(m => m.messageNo, new { @id = "msgNo" })
-                    <span class="input input--nariko">
-                        @Html.TextBoxFor(m => m.name, new { @id = "input-20", @class = "input__field input__field--nariko", @placeholder = "", @name = "Name", @type = "text", @required = "" })
-                        <label class="input__la input__label--nariko" for="input-20">
-                            <span class="input__label-content input__label-content--nariko">Your Name</span>
-                        </label>
-                    </span>
-                    <span class="input input--nariko">
-                        @Html.TextBoxFor(m => m.emails, new { @id = "input-21", @class = "input__field input__field--nariko", @placeholder = "", @name = "Email", @type = "email", @required = "" })
-                        <label class="input__label input__label--nariko" for="input-21">
-                            <span class="input__label-content input__label-content--nariko">Your Email</span>
-                        </label>
-                    </span>
-                    <span class="input input--nariko">
-                        <input class="input__field input__field--nariko" name="Subject" type="text" id="input-22"
-                               placeholder=" "  />
-                        <label class="input__label input__label--nariko" for="input-22">
-                            <span class="input__label-content input__label-content--nariko">Your Subject</span>
-                        </label>
-                    </span>
-                    @Html.TextAreaFor(m => m.allMessage, new { @placeholder = "Your Message...", @name = "Message", @required = "" })
+<!-- contact-form 2 -->
+<section class="w3l-contact-2">
+    <div class="contact-infubd section-gap">
+        <div class="wrapper">
+            <div class="contact-grids d-grid">
+                <div class="contact-left">
+                    <h3>Contact</h3>
+                    <span class="fa fa-envelope-open-o" aria-hidden="true"></span>
+                    <h4>Leave us a Message</h4>
+                    <h6>
+                        For more info or inquiry about our products project, and pricing please feel free to get in touch with
+                        us.
+                    </h6>
+                </div>
+                <div class="contact-right">
+                    <form  method="post" id="submitForm" class="signin-form">
+                        <div class="input-grids">
+                            @Html.TextBoxFor(m => m.name, new { @id = "w3lName", @class = "contact-input", @placeholder = "Your Name*", @name = "w3lName", @type = "text", @required = "" })
+                            @Html.TextBoxFor(m => m.emails, new { @id = "w3lSender", @class = "contact-input", @placeholder = "Your Email*", @name = "w3lSender", @type = "text", @required = "" })
 
-                    <input type="submit" value="Send" id="sendMsgs">
-                </form>
+                            @*<input type="text" name="w3lName" id="w3lName" placeholder="" class="contact-input" />
+                            <input type="email" name="w3lSender" id="w3lSender" placeholder="Your Email*" class="contact-input"
+                                   required="" />*@
+                            <input type="text" name="w3lSubect" id="w3lSubect" placeholder="Subject*" class="contact-input" />
+                        </div>
+                        <div class="form-input">
+                            @Html.TextAreaFor(m => m.allMessage, new { @id = "w3lMessage", @class = "contact-input", @placeholder = "Type your message here*", @name = "w3lMessage", @type = "text", @required = "" })
+                            @*<textarea name="w3lMessage" id="w3lMessage" placeholder="Type your message here*"
+        required=""></textarea>*@
+                        </div>
+                        <button class="btn btn-success form-control" id="sendMsgs">Send Message</button>
+                    </form>
+                </div>
+
             </div>
-            <div class="col-md-6 agileinfo_mail_grid_right">
-                <div class="agileinfo_mail_social_right">
-                    <div class="agileinfo_mail_social_rightl">
-                        <a href="#" class="maak_contact_facebook">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                            <p>Facebook</p>
-                        </a>
-                    </div>
-                    <div class="agileinfo_mail_social_rightr">
-                        <a href="#" class="maak_contact_twitter">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                            <p>Twitter</p>
-                        </a>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <div class="agileinfo_mail_social_right">
-                    <div class="agileinfo_mail_social_rightl">
-                        <a href="#" class="maak_contact_google">
-                            <i class="fa fa-google-plus" aria-hidden="true"></i>
-                            <p>Google+</p>
-                        </a>
-                    </div>
-                    <div class="agileinfo_mail_social_rightr">
-                        <a href="#" class="maak_contact_instagram">
-                            <i class="fa fa-instagram" aria-hidden="true"></i>
-                            <p>Instagram</p>
-                        </a>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <div class="agileinfo_mail_social_right">
-                    <div class="agileinfo_mail_social_right_social">
-                        <a href="#" class="maak_contact_rss">
-                            <i class="fa fa-rss"></i>
-                            <p>RSS</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
         </div>
     </div>
-</div>
+</section>
+<!-- /contact-form-2 -->
+<!-- mail -->
+
 <div class="agile_map">
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13589.73650651898!2d-8.055784630224624!3d31.62196199999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafe934d23cf64f%3A0x6d002ebf12a6a0ec!2sInstitut%20Sup%C3%A9rieur%20de%20Gestion%20et%20d&#39;Informatique!5e0!3m2!1sfr!2sma!4v1586519803140!5m2!1sfr!2sma"
-            style="border:0;">
-
-    </iframe>
+            style="border:0;"></iframe>
 
 </div>
 <!-- //mail -->
+@*<div class="team">
+        <div class="container">
+            <h3 class="Mk_header maak_agileits_header">Contact <span>Us</span></h3>
+            <p class="sub_para_agile">Add Some Short Description</p>
+            <div class="agile_team_grids_top">
+                <div class="col-md-6 agileinfo_mail_grid_left">
+                    <form action="#" method="post" id="submitForm">
+                        @Html.HiddenFor(m => m.messageNo, new { @id = "msgNo" })
+                        <span class="input input--nariko">
+                            @Html.TextBoxFor(m => m.name, new { @id = "input-20", @class = "input__field input__field--nariko", @placeholder = "", @name = "Name", @type = "text", @required = "" })
+                            <label class="input__la input__label--nariko" for="input-20">
+                                <span class="input__label-content input__label-content--nariko">Your Name</span>
+                            </label>
+                        </span>
+                        <span class="input input--nariko">
+                            @Html.TextBoxFor(m => m.emails, new { @id = "input-21", @class = "input__field input__field--nariko", @placeholder = "", @name = "Email", @type = "email", @required = "" })
+                            <label class="input__label input__label--nariko" for="input-21">
+                                <span class="input__label-content input__label-content--nariko">Your Email</span>
+                            </label>
+                        </span>
+                        <span class="input input--nariko">
+                            <input class="input__field input__field--nariko" name="Subject" type="text" id="input-22"
+                                   placeholder=" " />
+                            <label class="input__label input__label--nariko" for="input-22">
+                                <span class="input__label-content input__label-content--nariko">Your Subject</span>
+                            </label>
+                        </span>
+                        @Html.TextAreaFor(m => m.allMessage, new { @placeholder = "Your Message...", @name = "Message", @required = "" })
 
+
+                        <button id="sendMsgs" class="btn btn-success form-control">Send</button>
+                    </form>
+                </div>
+                <div class="col-md-6 agileinfo_mail_grid_right">
+                    <div class="agileinfo_mail_social_right">
+                        <div class="agileinfo_mail_social_rightl">
+                            <a href="#" class="maak_contact_facebook">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                <p>Facebook</p>
+                            </a>
+                        </div>
+                        <div class="agileinfo_mail_social_rightr">
+                            <a href="#" class="maak_contact_twitter">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                <p>Twitter</p>
+                            </a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="agileinfo_mail_social_right">
+                        <div class="agileinfo_mail_social_rightl">
+                            <a href="#" class="maak_contact_google">
+                                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                                <p>Google+</p>
+                            </a>
+                        </div>
+                        <div class="agileinfo_mail_social_rightr">
+                            <a href="#" class="maak_contact_instagram">
+                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                                <p>Instagram</p>
+                            </a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="agileinfo_mail_social_right">
+                        <div class="agileinfo_mail_social_right_social">
+                            <a href="#" class="maak_contact_rss">
+                                <i class="fa fa-rss"></i>
+                                <p>RSS</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>*@

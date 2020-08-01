@@ -15,14 +15,26 @@
         }
     </script>
     <title>@ViewBag.Title</title>
-
+    @RenderSection("Contact", false)
+    @RenderSection("Style_Reservation", false)
     @Styles.Render("~/template/css")
+
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700,900" rel="stylesheet">
 
+    <link rel="icon" href="~/soccer.ico" />
 
+
+    <script>
+        function showNotify() {
+            $.notify("Warning: In Progress...", { globalPosition: 'top-center', className: 'info' });
+        }
+        function showNotifySuccess() {
+            $.notify("You're accepted the terms", { globalPosition: 'top-center', className: 'success' });
+        }
+    </script>
 </head>
 <body>
-    
+
     <div class="header">
 
         <div class="design_header_right">
@@ -33,9 +45,9 @@
         </div>
         <div class="design_header_left">
             <ul>
-               @{ 
-                   Html.RenderPartial("_loginSingUp");
-               }
+                @{
+                    Html.RenderPartial("_loginSingUp");
+                }
             </ul>
 
         </div>
@@ -60,14 +72,14 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="@Url.Action("Index","Home")"><span data-hover="Home">Home</span></a></li>
                         <li><a href="@Url.Action("About","Home")"><span data-hover="About Us">About Us</span></a></li>
-                        <li><a href="#partners"><span data-hover="Events">Partners</span></a></li>
+                        <li><a href="#partners" class="samePage" data-scroll="partners"><span data-hover="Events">Partners</span></a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span data-hover="Short Codes">Others</span> <b class="caret"></b>
+                                <span data-hover="Others">Others</span> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu agile_short_dropdown">
-                                <li><a href="#glly">Latest gallery</a></li>
-                                <li><a href="#latestNews">Latest News</a></li>
+                                <li><a href="#glly" class="samePage" data-scroll="glly">Latest gallery</a></li>
+                                <li><a href="#latestNews" class="samePage" data-scroll="latestNews">Latest News</a></li>
                             </ul>
                         </li>
                         <li><a href="@Url.Action("Contact","Home")"><span data-hover="Mail Us">Contact Us</span></a></li>
@@ -173,7 +185,15 @@
     <script src="~/Scripts/slick.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         $(document).on('ready', function () {
-            
+
+            $('ul.nav li a.samePage, ul.dropdown-menu li a.partner').click(function (e) {
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $('#' + $(this).data('scroll')).offset().top
+                }, 1000)
+            });
+
+
             $(".center").slick({
                 dots: true,
                 infinite: true,
@@ -291,23 +311,10 @@
         });
     </script>
     <!-- //here ends scrolling icon -->
+    @RenderSection("scriptReservation", false)
 
-    <script>
-        $('#sendMsgs').click(function () {
-            //console.log('22');
-            var data = $("#submitForm").serialize();
-            $.ajax({
-                type: "Post",
-                url: "/Home/SaveDataInDatabase",
-                data: data,
-                success: function (result) {
-                    alert("Success!..");
-                    window.location.href = "/Home/index";
-                    //$("#myModalpop").modal("hide");
+    
+    <script src="~/Scripts/notify.js"></script>
 
-                }
-            })
-        });
-    </script>
 </body>
 </html>

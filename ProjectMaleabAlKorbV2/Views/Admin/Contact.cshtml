@@ -76,7 +76,7 @@
                     <h4>Delete Contact</h4>
                 </div>
                 <div class="modal-body">
-                    <h4 class="hs">Are You Sure? You Want To Delete This Player.</h4>
+                    <h4 class="hs">Are You Sure? You Want To Delete This Contact.</h4>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary" data-dismiss="modal" id="r">Cancle</a>
@@ -154,8 +154,8 @@
     }
 
     //Show The Popup Modal For DeleteComfirmation
-    var DeleteContact = function (playerNo) {
-        $("#ctnID").val(playerNo);
+    var DeleteContact = function (contactID) {
+        $("#ctnID").val(contactID);
         $("#DeleteConfirmation").modal("show");
     }
     var ConfirmDelete = function () {

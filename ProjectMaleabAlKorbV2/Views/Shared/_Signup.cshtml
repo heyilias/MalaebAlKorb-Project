@@ -28,22 +28,17 @@
 
                     <div class="login-form">
                         <form id="registerForm">
-                            @*@Html.TextBoxFor(p => p.names, new { @id = "regUsername", @placeholder = "Username", @name = "name", @type = "text", @required = "" })
-                            @Html.TextBoxFor(p => p.emails, new { @id = "regEmail", @placeholder = "Email", @name = "email", @type = "email", @required = "" })
-                            @Html.TextBoxFor(p => p.passwords, new { @id = "regPassword", @placeholder = "Password", @name = "password", @type = "password", @required = "" })*@
-                                        @*Html.TextBoxFor(p => p.names, new { @id = "regUsername", @placeholder = "Username", @name = "name", @type = "text", @required = "" })
-                            @Html.s(p => p.names, new { @id = "regUsername", @placeholder = "Username", @name = "name", @type = "text", @required = "" })*@
 
-                            <input type="text" name="names" placeholder="Username" id="username">
-                            <input type="email" name="emails" placeholder="Email" id="email" >
-                            <input type="password" name="passwords" placeholder="Password" id="password">
-                            <input type="text" name="phone" placeholder="Phone" id="phone">
+                            <input type="text" name="names" placeholder="Username" id="username" >
+                            <input type="email" name="emails" placeholder="example@example.com" id="email" >
+                            <input type="password" name="passwords" placeholder="Password" id="password" >
+                            <input type="text" name="phone" placeholder="+212 6X XX XX XX XX" id="phone" >
                             <br />
                             <button class="btn btn-info form-control" type="button" onclick="saveForm()">Sign Up</button>
-                            @*<input type="submit" value="Sign Up" onclick="saveForm()">*@
+
                         </form>
                     </div>
-                    <p><a href="#"> By clicking register, I agree to your terms</a></p>
+                    <p><a href="#"  onclick="showNotifySuccess()"> By clicking register, I agree to your terms</a></p>
                 </div>
             </div>
         </div>
@@ -72,11 +67,24 @@
             data: data,
             url: "/Home/saveData",
             success: function (result) { 
-                $('#msgOne').show();
-                $('#msgTwo').hide();
-                $('#registerForm')[0].reset();
-                document.location.href = "/Home/Index";
+                if (result == "success") {
+                    $('#msgOne').show();
+                    $('#msgTwo').hide();
+                    $('#registerForm')[0].reset();
+                    document.location.href = "/Home/Index";
+                }
+                else if (result == "inputError") {
+                    $.notify("Valid your input", { globalPosition: 'top-center', className: 'error' });
+                }
+                else {
+                    //alert(result);
+                    $.notify("This email already exist", { globalPosition: 'top-center', className: 'error' });
+                }
+            },
+            error: function () {
+                alert('error');
             }
+            
         })
     }
 </script>

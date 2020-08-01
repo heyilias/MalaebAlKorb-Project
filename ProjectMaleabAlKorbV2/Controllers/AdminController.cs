@@ -8,29 +8,101 @@ using System.Web.Mvc;
 
 namespace ProjectMaleabAlKorbV2.Controllers
 {
+    [HandleError]
     public class AdminController : Controller
     {
+
         MalaebAlKorbEntities db = new MalaebAlKorbEntities();
+
+        //login for admin
+        public ActionResult LoginAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LoginAdmin(Admin admin)
+        {
+            var adm = db.Admins.Where(a => a.Emails == admin.Emails && a.Passwords == admin.Passwords).FirstOrDefault();
+            if (adm != null)
+            {
+                Session["emailAdmin"] = admin.Emails;
+                Session["passadmin"] = admin.Passwords;
+                return RedirectToAction("Index", "Admin");
+            }
+            else
+            {
+                return View();
+            }
+            
+            
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            //FormsAuthentication.SignOut();
+            return RedirectToAction("LoginAdmin", "Admin");
+        }
 
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            if(Session["emailAdmin"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginAdmin", "Admin");
+            }
+            
+           
+           
         }
          //Test Commit 
         public ActionResult Registers()
         {
-            return View();
+            if (Session["emailAdmin"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginAdmin", "Admin");
+            }
+        }
+
+
+        //Nombre Players 
+        public JsonResult CountPlayer()
+        {
+            var countPlayer = db.Players.Count();
+            return Json(countPlayer, JsonRequestBehavior.AllowGet);
+        }
+
+        //Nombre Contact 
+        public JsonResult CountContact()
+        {
+            var countctn = db.Contacts.Count();
+            return Json(countctn, JsonRequestBehavior.AllowGet);
+        }
+        //Nombre Stadium 
+        public JsonResult CountStadium()
+        {
+            var countStd = db.Stadia.Count();
+            return Json(countStd, JsonRequestBehavior.AllowGet);
         }
 
         //Show all players in table registers
         public JsonResult GetPlyarsList()
         {
             List<Player> playerList = db.Players.ToList<Player>();
-
+            
             return Json(playerList, JsonRequestBehavior.AllowGet);
         }
-
+       
+        
         //ADD PLAYERS
         public JsonResult SaveDataInDatabase(Player model)
         {
@@ -95,14 +167,103 @@ namespace ProjectMaleabAlKorbV2.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /***********************Reservation**********************************/
         public ActionResult Reservations()
         {
-            return View();
+            if (Session["emailAdmin"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginAdmin", "Admin");
+            }
         }
+
+        //Show all Reservation 
+        public JsonResult GetReservationList()
+        {
+            List<Reservation> resList = db.Reservations.ToList<Reservation>();
+
+            return Json(resList, JsonRequestBehavior.AllowGet);
+        }
+
+        //ADD Reservation
+        public JsonResult SaveDataInDatabaseReservation(Reservation model)
+        {
+            var result = false;
+            if (ModelState.IsValid)
+                try
+                {
+                    if (model.reservationNo > 0)
+                    {
+                        Reservation res = db.Reservations.Where(r => r.reservationNo == model.reservationNo).FirstOrDefault();
+                        res.reservationTime = model.reservationTime;
+                        res.reservationDate = model.reservationDate;
+                        res.dateReservation = DateTime.Now;
+                        res.Phone = model.Phone;
+                        res.Email = model.Email;
+                        db.SaveChanges();
+                        result = true;
+                    }
+                    else
+                    {
+                        model.dateReservation = DateTime.Now;
+                        db.Reservations.Add(model);
+                        db.SaveChanges();
+                        result = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // Update Reservation
+        public JsonResult GetResById(int resNo)
+        {
+            Reservation model = db.Reservations.Where(r => r.reservationNo == resNo).FirstOrDefault();
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //Delete Reservation
+        public JsonResult DeleteRes(int resID)
+        {
+            bool result = false;
+            Reservation res = db.Reservations.Where(r => r.reservationNo == resID).FirstOrDefault();
+            if (res != null)
+            {
+                //player.dateCreated = DateTime.Now;
+                db.Reservations.Remove(res);
+                db.SaveChanges();
+                result = true;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         /***********************Contact**********************************/
         public ActionResult Contact()
         {
-            return View();
+            if (Session["emailAdmin"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginAdmin", "Admin");
+            }
         }
         
         public JsonResult GetContactList()
@@ -112,8 +273,8 @@ namespace ProjectMaleabAlKorbV2.Controllers
             return Json(ContactList, JsonRequestBehavior.AllowGet);
         }
 
-        //ADD Contact
-        public JsonResult SaveDataInDatabaseContact(Contact model)
+    //ADD Contact
+    public JsonResult SaveDataInDatabaseContact(Contact model)
         {
             var result = false;
             if (ModelState.IsValid)
@@ -165,7 +326,6 @@ namespace ProjectMaleabAlKorbV2.Controllers
             Contact cnt = db.Contacts.Where(c => c.messageNo == msgNo).FirstOrDefault();
             if (cnt != null)
             {
-                
                 db.Contacts.Remove(cnt);
                 db.SaveChanges();
                 result = true;
@@ -178,7 +338,14 @@ namespace ProjectMaleabAlKorbV2.Controllers
         /***********************Staduim****************************/
         public ActionResult Stadium()
         {
-            return View();
+            if (Session["emailAdmin"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("LoginAdmin", "Admin");
+            }
         }
         //show the list
         public JsonResult GetStadiumList()

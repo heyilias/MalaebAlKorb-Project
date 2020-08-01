@@ -2,8 +2,8 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MalaebAlKorbModelStoreContainer" CdmEntityContainer="MalaebAlKorbEntities">
     <EntitySetMapping Name="Contacts">
-      <EntityTypeMapping TypeName="MalaebAlKorbModel.Contact">
-        <MappingFragment StoreEntitySet="Contact">
+      <EntityTypeMapping TypeName="IsTypeOf(MalaebAlKorbModel.Contact)">
+        <MappingFragment StoreEntitySet="Contacts">
           <ScalarProperty Name="messageNo" ColumnName="messageNo" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="emails" ColumnName="emails" />
@@ -13,8 +13,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Players">
-      <EntityTypeMapping TypeName="MalaebAlKorbModel.Player">
-        <MappingFragment StoreEntitySet="Player">
+      <EntityTypeMapping TypeName="IsTypeOf(MalaebAlKorbModel.Player)">
+        <MappingFragment StoreEntitySet="Players">
           <ScalarProperty Name="playerNo" ColumnName="playerNo" />
           <ScalarProperty Name="names" ColumnName="names" />
           <ScalarProperty Name="emails" ColumnName="emails" />
@@ -25,8 +25,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Reservations">
-      <EntityTypeMapping TypeName="MalaebAlKorbModel.Reservation">
-        <MappingFragment StoreEntitySet="Reservation">
+      <EntityTypeMapping TypeName="IsTypeOf(MalaebAlKorbModel.Reservation)">
+        <MappingFragment StoreEntitySet="Reservations">
           <ScalarProperty Name="reservationNo" ColumnName="reservationNo" />
           <ScalarProperty Name="reservationTime" ColumnName="reservationTime" />
           <ScalarProperty Name="reservationDate" ColumnName="reservationDate" />
@@ -37,8 +37,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Stadia">
-      <EntityTypeMapping TypeName="MalaebAlKorbModel.Stadium">
-        <MappingFragment StoreEntitySet="Stadium">
+      <EntityTypeMapping TypeName="IsTypeOf(MalaebAlKorbModel.Stadium)">
+        <MappingFragment StoreEntitySet="Stadia">
           <ScalarProperty Name="stadiumNo" ColumnName="stadiumNo" />
           <ScalarProperty Name="stadiumName" ColumnName="stadiumName" />
           <ScalarProperty Name="stadiumCity" ColumnName="stadiumCity" />

@@ -4,13 +4,13 @@
 
 <div id="exampleSlider">
     <div>
-        
+
     </div>
     <div>
-        
+
     </div>
     <div>
-        
+
     </div>
 </div>
 <div class="container">
@@ -30,25 +30,21 @@
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                         <select class="form-control combobox_ville">
-                            <option value="kech">Marrakech</option>
-                            <option value="casa">Casablanca</option>
-                            <option value="rabat">Rabat</option>
-                            <option value="tanger">Tanger</option>
+                            <option value="Marrakech">Marrakech</option>
+                            <option value="Casablanca">Casablanca</option>
+                            <option value="Rabat">Rabat</option>
+                            <option value="Tanger">Tanger</option>
 
                         </select>
                     </div>
 
                     <div style="margin-top:10px" class="form-group">
-
-                        <div class="col-sm-12 controls">
-                            <a id="btn-login" href="@Url.Action("Index","Reservation")" class="btn btn-success btn-block">Find Place  </a>
-
-                        </div>
+                        @{
+                            Html.RenderPartial("btnReservation");
+                        }
                     </div>
 
                 </form>
-
-
 
             </div>
         </div>

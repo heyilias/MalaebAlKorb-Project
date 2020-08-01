@@ -13,7 +13,7 @@
                     <div class="login-form">
                         <form method="post" id="frmLogin">
                             <div id="msg" style="display:none"><ul style="color:red">Invalid Username or Password</ul></div>
-                            @Html.TextBoxFor(p => p.emails , new { @id = "regEmails", @placeholder = "Emails", @name = "email", @type = "text", @required = "" })
+                            @Html.TextBoxFor(p => p.emails, new { @id = "regEmails", @placeholder = "Emails", @name = "email", @type = "text", @required = "" })
                             @Html.TextBoxFor(p => p.passwords, new { @id = "regPassword", @placeholder = "Password", @name = "password", @type = "password", @required = "" })
                             <div class="tp">
                                 <button class="btn btn-info form-control" type="button" onclick="Login()">Login</button>
@@ -22,7 +22,7 @@
                             <br>
                             <div class="remember">
                                 <label class="custom-checkbox">
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="rememberMe">
                                     Remember me
                                 </label>
                                 <a href="#" class="pull-right">Forgot Password?</a>
@@ -31,9 +31,9 @@
                     </div>
                     <div class="login-social-grids">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#" onclick="showNotify()"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" onclick="showNotify()"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" onclick="showNotify()"><i class="fa fa-rss"></i></a></li>
                         </ul>
                     </div>
                     <p><a href="#" data-toggle="modal" data-target="#myModal3"> Don't have an account?</a></p>
@@ -71,13 +71,14 @@
                 if (result == "fail") {
                     $('#frmLogin')[0].reset();
                     $('#msg').show();
-                    alert("not successfully !!" + result);
+                    $.notify("You're email or password is not correct", { globalPosition: 'top-center', className: 'error' });
                 }
                 else {
-                   
+                    
                     $('#msg').hide();
                     document.location.href = "/Home/Index";
-                    alert('Login Success !!');
+                    //alert('Login Success !!');
+                    $.notify("You're log in ", { globalPosition: 'top-center', className: 'success' });
                 }
             }
         })
